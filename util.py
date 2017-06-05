@@ -31,26 +31,26 @@ class files:
     
     
     
-class kmeans:
-    
-    def __init__(self, data):
-        self.data = data
-        self.k = data.shape[1]
-        self.kmeans = KMeans(n_clusters=self.k)
-        self.kmeans.fit(data)
-    
-    def select_row_index(self, cluster_index):
-        y = self.kmeans.predict(self.data)
-        bools = y[:] == cluster_index
-        row_index = np.where(bools == True)
-        return np.array(row_index)
-    
-    def select_row(self, cluster_index):
-        row_index = self.select_row_index(cluster_index)
-        return self.data[row_index,:]
-    
-    def cluster_count(self):
-        return self.k
+#class kmeans:
+#    
+#    def __init__(self, data):
+#        self.data = data
+#        self.k = data.shape[1]
+#        self.kmeans = KMeans(n_clusters=self.k)
+#        self.kmeans.fit(data)
+#    
+#    def select_row_index(self, cluster_index):
+#        y = self.kmeans.predict(self.data)
+#        bools = y[:] == cluster_index
+#        row_index = np.where(bools == True)
+#        return np.array(row_index)
+#    
+#    def select_row(self, cluster_index):
+#        row_index = self.select_row_index(cluster_index)
+#        return self.data[row_index,:]
+#    
+#    def cluster_count(self):
+#        return self.k
     
     
 
@@ -77,6 +77,9 @@ class dataset:
     def column_count(self):
         return self.reduced_data.shape[1]
     
+    def row_count(self):
+        return self.reduced_data.shape[0]
+
     def remove_column(self, col_num):
         col = self.reduced_data[:,col_num]
         other = np.delete(self.reduced_data, [col_num], axis=1)

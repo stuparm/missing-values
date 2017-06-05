@@ -13,6 +13,11 @@ from util import dataset
 
 np.set_printoptions(threshold=np.nan)
 
+def get_centroid_count(column):
+    k = len(np.unique(column[~np.isnan(column)]))
+    return k
+    
+
 def initialize_centroids(data, k):
     """returns k centroids from the initial points"""
     rows = data.shape[0]
@@ -56,7 +61,7 @@ def calculate_distance(instance, centroid):
     nan_args = np.argwhere(np.isnan(instance))
     nan_count = len(nan_args)
     values_count = total_count - nan_count;
-    instance[nan_args] = centroid[nan_args] 
+    instance[nan_args] = centroid[nan_args]
     squared = (((instance - centroid) * (total_count/values_count))**2)
     squared_sum = np.sqrt(squared.sum()) 
     return squared_sum 
@@ -94,7 +99,7 @@ def cluster(data, k):
     print(new_centroids)
     return [new_centroids, closest]
     
-        
+  
         
     
 """   
